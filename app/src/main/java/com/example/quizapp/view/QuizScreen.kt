@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -51,9 +52,19 @@ fun QuizScreen(
             fontSize = 24.sp
         )
         questions[currentQuestion.value].answer.forEachIndexed { index, answer ->
-            RadioButton(selected = selectedAnswerIndex.value == index, onClick = {
-                selectedAnswerIndex.value = index
-            })
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                RadioButton(selected = selectedAnswerIndex.value == index, onClick = {
+                    selectedAnswerIndex.value = index
+                })
+                Text(
+                    text = answer.text,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
         }
 
         Button(
