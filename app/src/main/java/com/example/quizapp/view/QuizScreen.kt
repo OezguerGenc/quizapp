@@ -65,7 +65,11 @@ fun QuizScreen(
                 else
                     statsViewModel.increasenotcorrect()
 
-                currentQuestion.value++
+                if (currentQuestion.value+1 != questions.count())
+                    currentQuestion.value++
+                else {
+
+                }
 
 
             }/* move to next question*/) {
