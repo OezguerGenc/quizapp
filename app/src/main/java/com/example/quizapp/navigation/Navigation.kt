@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.quizapp.model.Question
 import com.example.quizapp.view.HomeScreen
 import com.example.quizapp.view.QuizScreen
+import com.example.quizapp.view.StatsScreen
 import com.example.quizapp.viewmodel.QuizViewModel
 import com.example.quizapp.viewmodel.StatsViewModel
 
@@ -27,9 +28,15 @@ fun Navigation(
             )
         }
         composable(route = Screen.QuizScreen.route){
-
             QuizScreen(
+                navController = navController,
                 quizViewModel = quizViewModel,
+                statsViewModel = statsViewModel,
+            )
+        }
+        composable(route = Screen.StatsScreen.route){
+            StatsScreen(
+                navController = navController,
                 statsViewModel = statsViewModel,
             )
         }

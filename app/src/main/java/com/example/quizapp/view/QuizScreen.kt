@@ -11,8 +11,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.quizapp.model.Answer
 import com.example.quizapp.model.Question
+import com.example.quizapp.navigation.Screen
 import com.example.quizapp.viewmodel.QuizViewModel
 import com.example.quizapp.viewmodel.StatsViewModel
 import java.util.*
@@ -20,6 +22,7 @@ import java.util.*
 @SuppressLint("UnrememberedMutableState")
 @Composable
 fun QuizScreen(
+    navController: NavController,
     quizViewModel: QuizViewModel,
     statsViewModel: StatsViewModel
 ) {
@@ -68,7 +71,7 @@ fun QuizScreen(
                 if (currentQuestion.value+1 != questions.count())
                     currentQuestion.value++
                 else {
-
+                    navController.navigate(Screen.StatsScreen.route)
                 }
 
 
