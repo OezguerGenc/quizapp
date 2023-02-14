@@ -15,6 +15,10 @@ class StatsViewModel: ViewModel() {
         notcorrect++
         println("NOT CORRECT = $notcorrect")
     }
+    fun clearstats(){
+        correct = 0
+        notcorrect = 0
+    }
 
     override fun toString(): String {
         return "Richtige Antworten: $correct\nFalsche Antworten: $notcorrect"
