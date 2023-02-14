@@ -1,17 +1,16 @@
 package com.example.quizapp.view
 
 import android.annotation.SuppressLint
+import android.widget.RadioGroup
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
+import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.quizapp.components.RadioButton
 import com.example.quizapp.model.Answer
 import com.example.quizapp.model.Question
 import com.example.quizapp.viewmodel.QuizViewModel
@@ -26,6 +25,12 @@ fun QuizScreen(
 ) {
 
     val questions = quizViewModel.questionlist
+
+    val selectionStates = remember { mutableStateListOf(false,false) }
+    var selectedAnswerIndex = remember {
+        mutableStateOf(0)
+    }
+
 
     var currentQuestion = remember {
         mutableStateOf(0)
@@ -42,16 +47,27 @@ fun QuizScreen(
             text = questions[currentQuestion.value].text,
             fontSize = 24.sp
         )
-        RadioButton(
-            questions[currentQuestion.value].answer
-        )
+        questions[currentQuestion.value].answer.forEachIndexed { index, answer ->
+            RadioButton(selected = selectedAnswerIndex.value == index, onClick = {
+                selectedAnswerIndex.value = index
+            })
+        }
+
         Button(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(100.dp)
                 .padding(horizontal = 40.dp),
             onClick = {
+
+                if (quizViewModel.checkAnswer(questions[currentQuestion.value], selectedAnswerIndex.value))
+                    statsViewModel.increasecorrect()
+                else
+                    statsViewModel.increasenotcorrect()
+
                 currentQuestion.value++
+
+
             }/* move to next question*/) {
             Text(
                 text = "Next",
