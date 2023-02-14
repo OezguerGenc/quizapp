@@ -19,7 +19,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.quizapp.components.RadioButton
 import com.example.quizapp.model.Answer
 import com.example.quizapp.model.Question
 import com.example.quizapp.navigation.Navigation

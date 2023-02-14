@@ -8,9 +8,12 @@ class StatsViewModel: ViewModel() {
 
     fun increasecorrect(){
         correct++
+        println("CORRECT = $correct")
+
     }
     fun increasenotcorrect(){
         notcorrect++
+        println("NOT CORRECT = $notcorrect")
     }
 
     override fun toString(): String {
