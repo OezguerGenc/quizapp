@@ -16,36 +16,40 @@ class QuizViewModel: ViewModel() {
 
     val db = Firebase.database.reference
 
-    val questionsize = 1
     var questionlist: MutableList<Question> = getQuestions()
 
+    fun checkAnswer(question: Question, answerIndex: Int): Boolean{
+        return question.answer[answerIndex].correct
+    }
 
     fun getQuestions(): MutableList<Question>{
-
 
         var answerlist: MutableList<Answer> = mutableListOf<Answer>()
         var questionlist: MutableList<Question> = mutableListOf<Question>()
 
         db.child("questions").get().addOnSuccessListener { result ->
 
-            for( quiestionindex in 0..questionsize ){
+            for( quiestionindex in 0..3 ){
                 val text = result.child(quiestionindex.toString()).child("text").value.toString()
-
-                for( i in 0..1 ){
-                    answerlist.add(
-                        Answer(
-                            text = result.child(quiestionindex.toString()).child("answer").child(i.toString()).child("text").value.toString(),
-                            correct = result.child(quiestionindex.toString()).child("answer").child(i.toString()).child("correct").value as Boolean
+                if (text != "null"){
+                    for( i in 0..1 ){
+                        answerlist.add(
+                            Answer(
+                                text = result.child(quiestionindex.toString()).child("answer").child(i.toString()).child("text").value.toString(),
+                                correct = result.child(quiestionindex.toString()).child("answer").child(i.toString()).child("correct").value as Boolean
+                            )
                         )
+                        Log.d(ContentValues.TAG, "ANSWER ===== ${answerlist[i].text}")
+                    }
+                    val question = Question(
+                        text = text,
+                        answer = answerlist
                     )
-                    Log.d(ContentValues.TAG, "ANSWER ===== ${answerlist[i].text}")
+                    questionlist.add(question)
+                    answerlist = mutableListOf<Answer>()
+                }else {
+                    break
                 }
-                val question = Question(
-                    text = text,
-                    answer = answerlist
-                )
-                questionlist.add(question)
-                answerlist = mutableListOf<Answer>()
             }
         }
         return questionlist
