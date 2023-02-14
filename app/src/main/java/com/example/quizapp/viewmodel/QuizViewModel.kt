@@ -29,7 +29,7 @@ class QuizViewModel: ViewModel() {
 
         db.child("questions").get().addOnSuccessListener { result ->
 
-            for( quiestionindex in 0..3 ){
+            for( quiestionindex in 0..100 ){
                 val text = result.child(quiestionindex.toString()).child("text").value.toString()
                 if (text != "null"){
                     for( i in 0..1 ){
