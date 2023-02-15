@@ -56,29 +56,40 @@ fun QuizScreen(
             textAlign = TextAlign.Center,
             fontSize = 24.sp
         )
-        questions[currentQuestion.value].answer.forEachIndexed { index, answer ->
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                RadioButton(
-                    colors = RadioButtonDefaults.colors(
-                        unselectedColor = Color.Gray,
-                        selectedColor = Color.Yellow
-                    ),
-                    selected = selectedAnswerIndex.value == index,
-                    onClick = {
-                        selectedAnswerIndex.value = index
-                    }
-                )
-                Text(
-                    color = Color.White,
-                    text = answer.text,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
+        Column(
+            modifier = Modifier.height(150.dp)
+        ) {
+            questions[currentQuestion.value].answer.forEachIndexed { index, answer ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 40.dp),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    RadioButton(
+                        colors = RadioButtonDefaults.colors(
+                            unselectedColor = Color.Gray,
+                            selectedColor = Color.Yellow
+                        ),
+                        selected = selectedAnswerIndex.value == index,
+                        onClick = {
+                            selectedAnswerIndex.value = index
+                        }
+                    )
+                    Text(
+                        modifier = Modifier
+                            .width(250.dp)
+                            .padding(start = 20.dp),
+                        color = Color.White,
+                        text = answer.text,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
         }
+
 
         OutlinedButton(
             modifier = Modifier
