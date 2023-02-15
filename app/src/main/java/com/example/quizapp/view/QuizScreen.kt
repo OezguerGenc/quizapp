@@ -32,19 +32,15 @@ fun QuizScreen(
     quizViewModel: QuizViewModel,
     statsViewModel: StatsViewModel
 ) {
-
     val questions = quizViewModel.questionlist
 
-    val selectionStates = remember { mutableStateListOf(false,false) }
     var selectedAnswerIndex = remember {
         mutableStateOf(0)
     }
 
-
     var currentQuestion = remember {
         mutableStateOf(0)
     }
-    var selectedAnswer: Answer
 
     Column(
         modifier = Modifier
