@@ -10,22 +10,23 @@ import com.example.quizapp.model.Answer
 import com.example.quizapp.model.Question
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.count
+import kotlinx.coroutines.tasks.await
 
 class QuizViewModel: ViewModel() {
 
     val db = Firebase.database.reference
 
-    var questionlist: MutableList<Question> = getQuestions()
+    var questionlist: MutableList<Question> = mutableListOf<Question>()
 
     fun checkAnswer(question: Question, answerIndex: Int): Boolean{
         return question.answer[answerIndex].correct
     }
 
-    fun getQuestions(): MutableList<Question>{
+    suspend fun getQuestions(){
 
         var answerlist: MutableList<Answer> = mutableListOf<Answer>()
-        var questionlist: MutableList<Question> = mutableListOf<Question>()
 
         db.child("questions").get().addOnSuccessListener { result ->
 
@@ -51,7 +52,6 @@ class QuizViewModel: ViewModel() {
                     break
                 }
             }
-        }
-        return questionlist
+        }.await()
     }
 }

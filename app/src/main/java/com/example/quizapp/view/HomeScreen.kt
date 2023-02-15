@@ -7,32 +7,23 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.example.quizapp.model.Question
 import com.example.quizapp.navigation.Screen
 import com.example.quizapp.viewmodel.QuizViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun HomeScreen(
-    navController: NavController,
+    quizViewModel: QuizViewModel,
+    navController: NavController
 ){
-
-    val coroutineScope = rememberCoroutineScope()
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -54,10 +45,15 @@ fun HomeScreen(
             shape = RoundedCornerShape(20),
             colors = ButtonDefaults.buttonColors(Color.Black),
             onClick = {
-                coroutineScope.launch {
-                    delay(500)
-                    navController.navigate(Screen.QuizScreen.route)
+                println("START BUTTON CLICKED")
+                GlobalScope.async(Dispatchers.Main) {
+                    if(quizViewModel.questionlist.isEmpty()){
+                        quizViewModel.getQuestions()
+                    }
+                    if (quizViewModel.questionlist.isNotEmpty())
+                        navController.navigate(Screen.QuizScreen.route)
                 }
+
             }
         ) {
             Text(
