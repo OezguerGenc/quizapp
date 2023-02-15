@@ -24,6 +24,7 @@ fun Navigation(
     ){
         composable(route = Screen.HomeScreen.route){
             HomeScreen(
+                quizViewModel = quizViewModel,
                 navController = navController,
             )
         }
