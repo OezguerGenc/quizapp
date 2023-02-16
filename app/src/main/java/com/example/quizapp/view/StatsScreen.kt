@@ -32,7 +32,7 @@ fun StatsScreen(
     ) {
         Text(
             color = Color.White,
-            text = "Geschaft!",
+            text = "Geschafft!",
             fontSize = 40.sp,
         )
         Column(
