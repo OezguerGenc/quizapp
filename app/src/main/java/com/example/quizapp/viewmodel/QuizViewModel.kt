@@ -29,10 +29,9 @@ class QuizViewModel: ViewModel() {
         var answerlist: MutableList<Answer> = mutableListOf<Answer>()
 
         db.child("questions").get().addOnSuccessListener { result ->
-
             for( quiestionindex in 0..100 ){
-                val text = result.child(quiestionindex.toString()).child("text").value.toString()
-                if (text != "null"){
+                if (result.child(quiestionindex.toString()).child("text").value != null){
+                    val text = result.child(quiestionindex.toString()).child("text").value.toString()
                     for( i in 0..1 ){
                         answerlist.add(
                             Answer(
