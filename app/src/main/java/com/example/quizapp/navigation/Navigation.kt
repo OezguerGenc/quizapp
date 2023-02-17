@@ -8,11 +8,13 @@ import com.example.quizapp.model.Question
 import com.example.quizapp.view.HomeScreen
 import com.example.quizapp.view.QuizScreen
 import com.example.quizapp.view.StatsScreen
+import com.example.quizapp.viewmodel.HomeViewModel
 import com.example.quizapp.viewmodel.QuizViewModel
 import com.example.quizapp.viewmodel.StatsViewModel
 
 @Composable
 fun Navigation(
+    homeViewModel: HomeViewModel,
     quizViewModel: QuizViewModel,
     statsViewModel: StatsViewModel
 ){
@@ -24,6 +26,7 @@ fun Navigation(
     ){
         composable(route = Screen.HomeScreen.route){
             HomeScreen(
+                homeViewModel = homeViewModel,
                 quizViewModel = quizViewModel,
                 navController = navController,
             )

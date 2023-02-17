@@ -23,6 +23,7 @@ import com.example.quizapp.model.Answer
 import com.example.quizapp.model.Question
 import com.example.quizapp.navigation.Navigation
 import com.example.quizapp.view.QuizScreen
+import com.example.quizapp.viewmodel.HomeViewModel
 import com.example.quizapp.viewmodel.QuizViewModel
 import com.example.quizapp.viewmodel.StatsViewModel
 import kotlinx.coroutines.launch
@@ -34,10 +35,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            val quizViewModel = QuizViewModel()
+            val homeViewModel = HomeViewModel()
+            val quizViewModel = QuizViewModel(homeViewModel.currentLanguage.dbname)
             val statsviewModel = StatsViewModel()
 
-            Navigation(quizViewModel, statsviewModel)
+            Navigation(homeViewModel, quizViewModel, statsviewModel)
         }
     }
 }

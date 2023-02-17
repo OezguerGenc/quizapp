@@ -2,11 +2,13 @@ package com.example.quizapp.viewmodel
 
 import android.content.ContentValues
 import android.util.Log
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.ViewModel
 import com.example.quizapp.model.Answer
+import com.example.quizapp.model.Language
 import com.example.quizapp.model.Question
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -14,7 +16,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.tasks.await
 
-class QuizViewModel: ViewModel() {
+class QuizViewModel(
+    var defaultdbname: String
+): ViewModel() {
 
     val db = Firebase.database.reference
 
@@ -28,11 +32,10 @@ class QuizViewModel: ViewModel() {
 
         var answerlist: MutableList<Answer> = mutableListOf<Answer>()
 
-        db.child("questions").get().addOnSuccessListener { result ->
-
+        db.child(defaultdbname).get().addOnSuccessListener { result ->
             for( quiestionindex in 0..100 ){
-                val text = result.child(quiestionindex.toString()).child("text").value.toString()
-                if (text != "null"){
+                if (result.child(quiestionindex.toString()).child("text").value != null){
+                    val text = result.child(quiestionindex.toString()).child("text").value.toString()
                     for( i in 0..1 ){
                         answerlist.add(
                             Answer(
