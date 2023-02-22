@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">QuizApp</string>
+    <string name="mainmenu_start">Start</string>
+    <string name="go_to_mainmenu_btn">Hauptmenu</string>
+    <string name="nextbtn">Weiter</string>
+
+    <string name="statsscrenn_title">Geschafft!</string>
+
+    <string name="app_made_by">Made by\nÖzgür Genc</string>
 </resources>

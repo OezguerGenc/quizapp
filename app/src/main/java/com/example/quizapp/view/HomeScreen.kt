@@ -1,6 +1,8 @@
 package com.example.quizapp.view
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.res.Resources
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -17,11 +19,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.quizapp.R
 import com.example.quizapp.model.Language
 import com.example.quizapp.model.Question
 import com.example.quizapp.navigation.Screen
 import com.example.quizapp.viewmodel.HomeViewModel
 import com.example.quizapp.viewmodel.QuizViewModel
+import com.google.rpc.context.AttributeContext.Resource
 import kotlinx.coroutines.*
 
 @SuppressLint("CoroutineCreationDuringComposition")
@@ -31,6 +35,8 @@ fun HomeScreen(
     quizViewModel: QuizViewModel,
     navController: NavController
 ){
+
+    val context = LocalContext.current.applicationContext
 
     var selectedLanguage = remember {
         mutableStateOf(homeViewModel.currentLanguage)
@@ -96,7 +102,7 @@ fun HomeScreen(
             Text(
                 modifier = Modifier.padding(40.dp),
                 color = Color.White,
-                text = "QuizApp",
+                text = context.getString(R.string.app_name),
                 fontSize = 34.sp
             )
             OutlinedButton(
@@ -119,7 +125,7 @@ fun HomeScreen(
             ) {
                 Text(
                     color = Color.White,
-                    text = "Start",
+                    text = context.getString(R.string.mainmenu_start),
                     fontSize = 34.sp,
                     textAlign = TextAlign.Center,
                 )
@@ -127,7 +133,7 @@ fun HomeScreen(
             Text(
                 modifier = Modifier.padding(40.dp),
                 color = Color.White,
-                text = "Made by\nÖzgür Genc",
+                text = context.getString(R.string.app_made_by),
                 fontSize = 16.sp,
                 textAlign = TextAlign.Center
             )

@@ -1,12 +1,14 @@
 package com.example.quizapp.viewmodel
 
 import android.content.ContentValues
+import android.content.res.Resources
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.ViewModel
+import com.example.quizapp.R
 import com.example.quizapp.model.Answer
 import com.example.quizapp.model.Language
 import com.example.quizapp.model.Question
