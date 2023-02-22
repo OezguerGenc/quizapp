@@ -11,11 +11,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.quizapp.R
 import com.example.quizapp.model.Answer
 import com.example.quizapp.model.Question
 import com.example.quizapp.navigation.Screen
@@ -33,6 +35,8 @@ fun QuizScreen(
     statsViewModel: StatsViewModel
 ) {
     val questions = quizViewModel.questionlist
+
+    val context = LocalContext.current.applicationContext
 
     var selectedAnswerIndex = remember {
         mutableStateOf(0)
@@ -114,7 +118,7 @@ fun QuizScreen(
         ) {
             Text(
                 color = Color.White,
-                text = "Next",
+                text = context.getString(R.string.nextbtn),
                 fontSize = 30.sp,
                 textAlign = TextAlign.Center,
             )

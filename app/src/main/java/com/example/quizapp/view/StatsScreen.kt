@@ -11,20 +11,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.quizapp.navigation.Screen
 import com.example.quizapp.viewmodel.StatsViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.example.quizapp.R
 
 @Composable
 fun StatsScreen(
     navController: NavController,
     statsViewModel: StatsViewModel
 ){
+    val context = LocalContext.current.applicationContext
+
     Column(
         modifier = Modifier.fillMaxSize().background(Color.Black),
         verticalArrangement = Arrangement.SpaceEvenly,
@@ -32,7 +34,7 @@ fun StatsScreen(
     ) {
         Text(
             color = Color.White,
-            text = "Geschafft!",
+            text = context.getString(R.string.statsscrenn_title),
             fontSize = 40.sp,
         )
         Column(
@@ -66,7 +68,7 @@ fun StatsScreen(
         ) {
             Text(
                 color = Color.White,
-                text = "Hauptmenu",
+                text = context.getString(R.string.go_to_mainmenu_btn),
                 fontSize = 34.sp,
                 textAlign = TextAlign.Center,
             )
